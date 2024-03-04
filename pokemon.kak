@@ -103,8 +103,6 @@ define-command -override pokemon-map-default-keys -docstring %{
   map global normal ^ ':pokemon-add prompt<ret>'
 }
 
-pokemon-map-default-keys
-
 define-command -override pokemon-list -docstring %{
   list all pokemons in the *pokemons* buffer
 } %{
