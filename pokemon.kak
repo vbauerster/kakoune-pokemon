@@ -24,6 +24,7 @@ define-command -override pokemon-map-default-keys -docstring %{
   map global normal <a-7> ':pokemon-open 7<ret>'
   map global normal <a-8> ':pokemon-open 8<ret>'
   map global normal <a-9> ':pokemon-open 9<ret>'
+  map global normal <a-0> ':pokemon-open<ret>'
   map global normal ^ ':pokemon-add prompt<ret>'
 }
 
