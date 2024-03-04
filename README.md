@@ -42,3 +42,7 @@ Index mappings are self adjusted (not fixed). Let say 3 buffers named `A, B, C` 
 - `pokemon-list`: list all pokemons
 
 Normally there is no need to use above commands if default mappings were applied. Just hit `^` to bring pokemon user menu which includes all navigational mappings.
+
+## Alternatives
+
+[kak-harpoon](https://github.com/raiguard/kak-harpoon)
