@@ -12,7 +12,11 @@ map global pokemon n ':pokemon-next<ret>'
 map global pokemon l ':pokemon-list<ret>' -docstring 'LIST'
 map global pokemon d ':pokemon-drop<ret>' -docstring 'DROP'
 
-define-command -override pokemon-add -params ..1 %{
+define-command -override pokemon-add -params ..1 -docstring %{
+  pokemon-add [switches]: add current buffer to the list of pokemons
+  Switches:
+  prompt|p prompt before add|or and display user mode
+} %{
   evaluate-commands %sh{
     [ "$kak_bufname" = '*debug*' ] && exit
     case "$1" in
@@ -32,7 +36,9 @@ define-command -override pokemon-add -params ..1 %{
   }
 }
 
-define-command -override pokemon-open -params ..1 %{
+define-command -override pokemon-open -params ..1 -docstring %{
+  pokemon-open [index]: open pokemon by index or last added if there is no index
+} %{
   evaluate-commands %sh{
     index="${1:-0}"
     if [ "$index" -le "$kak_opt_pokemon_len" ]; then
@@ -45,7 +51,9 @@ define-command -override pokemon-open -params ..1 %{
   }
 }
 
-define-command -override pokemon-drop -params ..1 %{
+define-command -override pokemon-drop -params ..1 -docstring %{
+  pokemon-drop [index]: drop pokemon by index or current one if there is no index
+} %{
   evaluate-commands %sh{
     index="${1:-0}"
     if [ "$index" -le "$kak_opt_pokemon_len" ]; then
@@ -58,7 +66,9 @@ define-command -override pokemon-drop -params ..1 %{
   }
 }
 
-define-command -override pokemon-next -docstring 'navigate next pokemon' %{
+define-command -override pokemon-next -docstring %{
+  goto next pokemon if available in the current context
+} %{
   try %{
     buffer %opt{pokemon_next}
     enter-user-mode pokemon
@@ -67,7 +77,9 @@ define-command -override pokemon-next -docstring 'navigate next pokemon' %{
   }
 }
 
-define-command -override pokemon-prev -docstring 'navigate previous pokemon' %{
+define-command -override pokemon-prev -docstring %{
+  goto previous pokemon if available in the current context
+} %{
   try %{
     buffer %opt{pokemon_prev}
     enter-user-mode pokemon
@@ -76,7 +88,9 @@ define-command -override pokemon-prev -docstring 'navigate previous pokemon' %{
   }
 }
 
-define-command pokemon-map-default-keys -docstring 'map default keybindings' %{
+define-command -override pokemon-map-default-keys -docstring %{
+  map default keybindings
+} %{
   map global normal <a-1> ':pokemon-open 1<ret>'
   map global normal <a-2> ':pokemon-open 2<ret>'
   map global normal <a-3> ':pokemon-open 3<ret>'
@@ -91,7 +105,9 @@ define-command pokemon-map-default-keys -docstring 'map default keybindings' %{
 
 pokemon-map-default-keys
 
-define-command -override pokemon-list %{
+define-command -override pokemon-list -docstring %{
+  list all pokemons in the *pokemons* buffer
+} %{
   try %{
     buffer *pokemons*
   } catch %{
