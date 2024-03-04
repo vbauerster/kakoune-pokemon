@@ -12,6 +12,21 @@ map global pokemon n ':pokemon-next<ret>'
 map global pokemon l ':pokemon-list<ret>' -docstring 'LIST'
 map global pokemon d ':pokemon-drop<ret>' -docstring 'DROP'
 
+define-command -override pokemon-map-default-keys -docstring %{
+  map default keybindings
+} %{
+  map global normal <a-1> ':pokemon-open 1<ret>'
+  map global normal <a-2> ':pokemon-open 2<ret>'
+  map global normal <a-3> ':pokemon-open 3<ret>'
+  map global normal <a-4> ':pokemon-open 4<ret>'
+  map global normal <a-5> ':pokemon-open 5<ret>'
+  map global normal <a-6> ':pokemon-open 6<ret>'
+  map global normal <a-7> ':pokemon-open 7<ret>'
+  map global normal <a-8> ':pokemon-open 8<ret>'
+  map global normal <a-9> ':pokemon-open 9<ret>'
+  map global normal ^ ':pokemon-add prompt<ret>'
+}
+
 define-command -override pokemon-add -params ..1 -docstring %{
   pokemon-add [switches]: add current buffer to the list of pokemons
   Switches:
@@ -86,21 +101,6 @@ define-command -override pokemon-prev -docstring %{
   } catch %{
     fail 'pokemon passed away'
   }
-}
-
-define-command -override pokemon-map-default-keys -docstring %{
-  map default keybindings
-} %{
-  map global normal <a-1> ':pokemon-open 1<ret>'
-  map global normal <a-2> ':pokemon-open 2<ret>'
-  map global normal <a-3> ':pokemon-open 3<ret>'
-  map global normal <a-4> ':pokemon-open 4<ret>'
-  map global normal <a-5> ':pokemon-open 5<ret>'
-  map global normal <a-6> ':pokemon-open 6<ret>'
-  map global normal <a-7> ':pokemon-open 7<ret>'
-  map global normal <a-8> ':pokemon-open 8<ret>'
-  map global normal <a-9> ':pokemon-open 9<ret>'
-  map global normal ^ ':pokemon-add prompt<ret>'
 }
 
 define-command -override pokemon-list -docstring %{
