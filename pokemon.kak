@@ -150,7 +150,6 @@ define-command -override -hidden pokemon-debug %{
 }
 
 define-command -override -hidden pokemon-set %{
-  # echo -debug pokemon-set: %val{bufname}
   trigger-user-hook "PokemonLink=%val{bufname} prev=%opt{pokemon_head}"
   trigger-user-hook "PokemonLink=%opt{pokemon_head} next=%val{bufname}"
   set-option -add global pokemon_len 1
@@ -160,7 +159,6 @@ define-command -override -hidden pokemon-set %{
 }
 
 define-command -override -hidden pokemon-unset %{
-  # echo -debug pokemon-unset: %val{bufname}
   trigger-user-hook "PokemonLink=%opt{pokemon_prev} next=%opt{pokemon_next}"
   trigger-user-hook "PokemonLink=%opt{pokemon_next} prev=%opt{pokemon_prev}"
   unset-option buffer pokemon_prev
@@ -170,7 +168,6 @@ define-command -override -hidden pokemon-unset %{
 }
 
 define-command -override -hidden pokemon-drop-current %{
-  echo -debug pokemon-drop-current: %val{bufname}
   set-option global pokemon_head %opt{pokemon_prev}
   set-option global pokemon_iter %opt{pokemon_next}
   pokemon-update-index %opt{pokemon_index}
@@ -181,7 +178,6 @@ define-command -override -hidden pokemon-open-by-index -params 2 %{
   evaluate-commands -buffer '*' %{
     evaluate-commands %sh{
       if [ "$1" -eq "$kak_opt_pokemon_index" ]; then
-        printf 'echo -debug found: %s\n' "$kak_bufname"
         printf 'evaluate-commands -client %s -verbatim -- buffer %s\n' "$2" "$kak_bufname"
       fi
     }
@@ -200,12 +196,10 @@ define-command -override -hidden pokemon-drop-by-index -params 1 %{
 }
 
 define-command -override -hidden pokemon-update-index -params 1 %{
-  # echo -debug pokemon-update-index: %arg{@}
   evaluate-commands -buffer %opt{pokemon_iter} %{
     set-option global pokemon_head %val{bufname}
     set-option global pokemon_iter %opt{pokemon_next}
     pokemon-update-index %opt{pokemon_index}
-    echo -debug %val{bufname} old_index: %opt{pokemon_index} new_index: %arg{1}
     set-option buffer pokemon_index %arg{1}
   }
 }
@@ -213,7 +207,6 @@ define-command -override -hidden pokemon-update-index -params 1 %{
 hook global User "PokemonLink=(.*) prev=(.*)" %{
   # if -buffer arg is empty eval block is not executed
   evaluate-commands -buffer %val{hook_param_capture_1} %{
-    echo -debug %val{hook_param}
     set-option buffer pokemon_prev %val{hook_param_capture_2}
     map buffer pokemon p ':pokemon-prev<ret>' -docstring %val{hook_param_capture_2}
   }
@@ -222,7 +215,6 @@ hook global User "PokemonLink=(.*) prev=(.*)" %{
 hook global User "PokemonLink=(.*) next=(.*)" %{
   # if -buffer arg is empty eval block is not executed
   evaluate-commands -buffer %val{hook_param_capture_1} %{
-    echo -debug %val{hook_param}
     set-option buffer pokemon_next %val{hook_param_capture_2}
     map buffer pokemon n ':pokemon-next<ret>' -docstring %val{hook_param_capture_2}
   }
