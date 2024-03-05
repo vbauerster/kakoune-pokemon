@@ -25,7 +25,7 @@ It's highly recommended to add default keybindings with `pokemon-map-default-key
   map global normal <a-7> ':pokemon-open 7<ret>'
   map global normal <a-8> ':pokemon-open 8<ret>'
   map global normal <a-9> ':pokemon-open 9<ret>'
-  map global normal <a-0> ':pokemon-open<ret>' # open last added one
+  map global normal <a-0> ':pokemon-open<ret>' -docstring 'open last added one'
   map global normal ^ ':pokemon-add prompt<ret>'
 ```
 
