@@ -138,16 +138,6 @@ define-command -override pokemon-list -docstring %{
   }
 }
 
-define-command -override -hidden pokemon-debug %{
-  echo -debug -- ---
-  echo -debug pokemon_head: %opt{pokemon_head}
-  echo -debug pokemon_prev: %opt{pokemon_prev}
-  echo -debug pokemon_next: %opt{pokemon_next}
-  echo -debug pokemon_iter: %opt{pokemon_iter}
-  echo -debug pokemon_len: %opt{pokemon_len}
-  echo -debug pokemon_index: %opt{pokemon_index}
-}
-
 define-command -override -hidden pokemon-set %{
   trigger-user-hook "PokemonLink=%val{bufname} prev=%opt{pokemon_head}"
   trigger-user-hook "PokemonLink=%opt{pokemon_head} next=%val{bufname}"
@@ -173,6 +163,26 @@ define-command -override -hidden pokemon-drop-current %{
   pokemon-unset
 }
 
+define-command -override -hidden pokemon-update-index -params 1 %{
+  evaluate-commands -buffer %opt{pokemon_iter} %{
+    set-option global pokemon_head %val{bufname}
+    set-option global pokemon_iter %opt{pokemon_next}
+    pokemon-update-index %opt{pokemon_index}
+    set-option buffer pokemon_index %arg{1}
+  }
+}
+
+define-command -override -hidden pokemon-drop-by-index -params 1 %{
+  evaluate-commands -buffer '*' %{
+    evaluate-commands %sh{
+      if [ "$1" -eq "$kak_opt_pokemon_index" ]; then
+        printf "set-option global pokemon_head '%s'\n" "$kak_bufname"
+      fi
+    }
+  }
+  evaluate-commands -buffer %opt{pokemon_head} pokemon-drop-current
+}
+
 define-command -override -hidden pokemon-open-by-index -params 2 %{
   evaluate-commands -buffer '*' %{
     evaluate-commands %sh{
@@ -191,26 +201,6 @@ define-command -override -hidden pokemon-open-in-the-list %{
   }
 }
 
-define-command -override -hidden pokemon-drop-by-index -params 1 %{
-  evaluate-commands -buffer '*' %{
-    evaluate-commands %sh{
-      if [ "$1" -eq "$kak_opt_pokemon_index" ]; then
-        printf "set-option global pokemon_head '%s'\n" "$kak_bufname"
-      fi
-    }
-  }
-  evaluate-commands -buffer %opt{pokemon_head} pokemon-drop-current
-}
-
-define-command -override -hidden pokemon-update-index -params 1 %{
-  evaluate-commands -buffer %opt{pokemon_iter} %{
-    set-option global pokemon_head %val{bufname}
-    set-option global pokemon_iter %opt{pokemon_next}
-    pokemon-update-index %opt{pokemon_index}
-    set-option buffer pokemon_index %arg{1}
-  }
-}
-
 hook global User "PokemonLink=(.*) prev=(.*)" %{
   # if -buffer arg is empty eval block is not executed
   evaluate-commands -buffer %val{hook_param_capture_1} %{
@@ -225,4 +215,14 @@ hook global User "PokemonLink=(.*) next=(.*)" %{
     set-option buffer pokemon_next %val{hook_param_capture_2}
     map buffer pokemon n ':pokemon-next<ret>' -docstring %val{hook_param_capture_2}
   }
+}
+
+define-command -override -hidden pokemon-debug %{
+  echo -debug -- ---
+  echo -debug pokemon_head: %opt{pokemon_head}
+  echo -debug pokemon_prev: %opt{pokemon_prev}
+  echo -debug pokemon_next: %opt{pokemon_next}
+  echo -debug pokemon_iter: %opt{pokemon_iter}
+  echo -debug pokemon_len: %opt{pokemon_len}
+  echo -debug pokemon_index: %opt{pokemon_index}
 }
