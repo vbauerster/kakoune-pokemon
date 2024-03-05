@@ -53,7 +53,7 @@ define-command -override pokemon-add -params ..1 -docstring %{
 }
 
 define-command -override pokemon-open -params ..1 -docstring %{
-  pokemon-open [index]: open pokemon by index or last added if there is no index
+  pokemon-open [index]: open pokemon by index or last added one if there is no index
 } %{
   evaluate-commands %sh{
     index="${1:-0}"
