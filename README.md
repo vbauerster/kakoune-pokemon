@@ -43,7 +43,7 @@ Index mappings are self adjusted (not fixed). Let say 3 buffers named `A, B, C` 
 - `pokemon-list`: list all pokemons
 - `pokemon-map-default-keys`: map default keybindings
 
-Normally there is no need to use above commands if default mappings were applied. Just hit `^` to bring pokemon user menu which includes all navigational mappings.
+Normally there is no need to use above commands if default mappings were applied. Just hit `<a-0>^` to bring pokemon user menu which includes all navigational mappings.
 
 ## Alternatives
 
