@@ -129,7 +129,7 @@ define-command -override pokemon-list -docstring %{
       } catch %{
         execute-keys gg
       }
-      map buffer normal <ret> ':pokemon-open %val{cursor_line}<ret>'
+      map buffer normal <ret> ':pokemon-open-in-the-list<ret>'
       map buffer normal <esc> ':delete-buffer *pokemons*<ret>'
       hook -once global WinDisplay '(?!\*pokemons\*).*' %{
         try %{ delete-buffer *pokemons* }
@@ -180,6 +180,14 @@ define-command -override -hidden pokemon-open-by-index -params 2 %{
         printf 'evaluate-commands -client %s -verbatim -- buffer %s\n' "$2" "$kak_bufname"
       fi
     }
+  }
+}
+
+define-command -override -hidden pokemon-open-in-the-list %{
+  try %{
+    execute-keys 'x_,:b <c-r>.<ret>'
+  } catch %{
+    pokemon-open %val{cursor_line}
   }
 }
 
