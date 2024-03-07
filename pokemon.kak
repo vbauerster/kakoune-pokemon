@@ -197,7 +197,7 @@ define-command -override -hidden pokemon-open-by-index -params 2 %{
 
 define-command -override -hidden pokemon-open-in-the-list %{
   try %{
-    execute-keys 'x_,:b ''<c-r>.''<ret>'
+    execute-keys 'x_:b ''<c-r>.''<ret>'
   } catch %{
     pokemon-open %val{cursor_line}
   }
