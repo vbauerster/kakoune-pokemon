@@ -34,7 +34,7 @@ Index mappings are self adjusted (not fixed). Let say 3 buffers named `A, B, C` 
 
 ### Adding buffer to the pokemon list
 
-Use `pokemon-add` command directly or map it to your liking. Good normal mode candidates are `^`, `X`, `<a-y>` and `<a-Y>` because all of them are free by default. Following is just example mappings (not applied by default):
+Use `pokemon-add` command directly or map it to your liking. Good normal mode candidates are `^`, `X`, `<a-X>`, `<a-y>` and `<a-Y>` because all of them are free by default. Following is just example mappings (not applied by default):
 
 ```
   map global normal <a-y> ':pokemon-add prompt<ret>' -docstring 'prompt before add and enter pokemon user mode afterwards'
