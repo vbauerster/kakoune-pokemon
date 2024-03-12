@@ -29,7 +29,7 @@ define-command -override pokemon-map-default-keys -docstring %{
 }
 
 define-command -override pokemon-add -params ..1 -docstring %{
-  pokemon-add [switches]: add current buffer to the list of pokemons
+  pokemon-add [switches]: add current buffer to the pokemon list
   Switches:
   prompt|p prompt before add and|or display pokemon user mode
 } %{

@@ -35,7 +35,7 @@ Index mappings are self adjusted (not fixed). Let say 3 buffers named `A, B, C` 
 
 ### Available commands
 
-- `pokemon-add`: add current buffer to the list of pokemons
+- `pokemon-add`: add current buffer to the pokemon list
 - `pokemon-drop`: drop pokemon by index or current one if there is no index
 - `pokemon-open`: open pokemon by index or last added one if there is no index
 - `pokemon-prev`: goto previous pokemon if available in the current context
