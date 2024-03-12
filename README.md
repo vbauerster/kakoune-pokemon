@@ -26,12 +26,20 @@ It's highly recommended to add default keybindings with `pokemon-map-default-key
   map global normal <a-8> ':pokemon-open 8<ret>'
   map global normal <a-9> ':pokemon-open 9<ret>'
   map global normal <a-0> ':pokemon-open<ret>' -docstring 'open last added one'
-  map global normal ^ ':pokemon-add prompt<ret>'
 ```
 
 ### Index mappings behaviour
 
 Index mappings are self adjusted (not fixed). Let say 3 buffers named `A, B, C` were added to the list, so buffer `A` can be accessed with `<a-1>`, buffer `B` with `<a-2>`, and so on. Dropping buffer `B` makes `<a-2>` access buffer `C` and `<a-3>` becomes no-op.
+
+### Adding buffer to the pokemon list
+
+Use `pokemon-add` command directly or map it to your liking. Good normal mode candidates are `^`, `X`, `<a-y>` and `<a-Y>` because all of them are free by default. Following is just example mappings (not applied by default):
+
+```
+  map global normal <a-y> ':pokemon-add prompt<ret>' -docstring 'prompt before add and enter pokemon user mode afterwards'
+  map global normal <a-Y> ':pokemon-add<ret>' -docstring 'add silently, no prompt no user mode'
+```
 
 ### Available commands
 
@@ -42,8 +50,6 @@ Index mappings are self adjusted (not fixed). Let say 3 buffers named `A, B, C` 
 - `pokemon-next`: goto next pokemon if available in the current context
 - `pokemon-list`: list all pokemons
 - `pokemon-map-default-keys`: map default keybindings
-
-Normally there is no need to use above commands if default mappings were applied. Just hit `<a-0>^` to bring pokemon user menu which includes all navigational mappings.
 
 ## Alternatives
 
