@@ -1,3 +1,4 @@
+declare-option -hidden str pokemon_selections_desc
 declare-option -hidden str pokemon_head
 declare-option -hidden str pokemon_next
 declare-option -hidden str pokemon_prev
@@ -60,7 +61,7 @@ define-command -override pokemon-open -params ..1 -docstring %{
       if [ "$index" -gt 0 ]; then
         printf "pokemon-open-by-index %d '%s'\n" "$index" "$kak_client"
       elif [ -n "$kak_opt_pokemon_head" ]; then
-        printf "buffer '%s'\n" "$kak_opt_pokemon_head"
+        printf "evaluate-commands -buffer '%s' -verbatim -- pokemon-buffer-select %s\n" "$kak_opt_pokemon_head" "$kak_client"
       fi
     fi
   }
@@ -86,6 +87,10 @@ define-command -override pokemon-next -docstring %{
 } %{
   try %{
     buffer %opt{pokemon_next}
+    try %{
+      select %opt{pokemon_selections_desc}
+      execute-keys vv
+    }
     enter-user-mode pokemon
   } catch %{
     fail 'pokemon passed away'
@@ -97,6 +102,10 @@ define-command -override pokemon-prev -docstring %{
 } %{
   try %{
     buffer %opt{pokemon_prev}
+    try %{
+      select %opt{pokemon_selections_desc}
+      execute-keys vv
+    }
     enter-user-mode pokemon
   } catch %{
     fail 'pokemon passed away'
@@ -146,6 +155,7 @@ define-command -override -hidden pokemon-set %{
   set-option global pokemon_head %val{bufname}
   set-option buffer pokemon_index %opt{pokemon_len}
   hook buffer BufClose '.*' pokemon-drop-current
+  map buffer pokemon s ':set-option buffer pokemon_selections_desc %val{selections_desc}<ret>' -docstring 'SET selection'
 }
 
 define-command -override -hidden pokemon-unset %{
@@ -188,8 +198,18 @@ define-command -override -hidden pokemon-open-by-index -params 2 %{
   evaluate-commands -buffer '*' %{
     evaluate-commands %sh{
       if [ "$1" -eq "$kak_opt_pokemon_index" ]; then
-        printf "evaluate-commands -client '%s' -verbatim -- buffer '%s'\n" "$2" "$kak_bufname"
+        printf "pokemon-buffer-select %s\n" "$2"
       fi
+    }
+  }
+}
+
+define-command -hidden pokemon-buffer-select -params 1 %{
+  evaluate-commands -client "%arg{1}" %exp{
+    buffer '%val{bufname}'
+    try %%{
+      select %opt{pokemon_selections_desc}
+      execute-keys vv
     }
   }
 }
@@ -197,6 +217,10 @@ define-command -override -hidden pokemon-open-by-index -params 2 %{
 define-command -override -hidden pokemon-open-in-the-list %{
   try %{
     execute-keys 'x_:b ''<c-r>.''<ret>'
+    try %{
+      select %opt{pokemon_selections_desc}
+      execute-keys vv
+    }
   } catch %{
     pokemon-open %val{cursor_line}
   }
@@ -226,4 +250,5 @@ define-command -override -hidden pokemon-debug %{
   echo -debug pokemon_iter: %opt{pokemon_iter}
   echo -debug pokemon_len: %opt{pokemon_len}
   echo -debug pokemon_index: %opt{pokemon_index}
+  echo -debug pokemon_selections_desc: %opt{pokemon_selections_desc}
 }
