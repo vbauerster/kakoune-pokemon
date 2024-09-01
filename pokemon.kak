@@ -150,7 +150,7 @@ define-command -override pokemon-list -docstring %{
   }
 }
 
-define-command -override -hidden pokemon-set %{
+define-command -hidden pokemon-set %{
   trigger-user-hook "PokemonLink=%val{bufname} prev=%opt{pokemon_head}"
   trigger-user-hook "PokemonLink=%opt{pokemon_head} next=%val{bufname}"
   set-option -add global pokemon_len 1
@@ -160,7 +160,7 @@ define-command -override -hidden pokemon-set %{
   map buffer pokemon s ':set-option buffer pokemon_selections_desc %val{selections_desc}<ret>' -docstring 'SET selection'
 }
 
-define-command -override -hidden pokemon-unset %{
+define-command -hidden pokemon-unset %{
   trigger-user-hook "PokemonLink=%opt{pokemon_prev} next=%opt{pokemon_next}"
   trigger-user-hook "PokemonLink=%opt{pokemon_next} prev=%opt{pokemon_prev}"
   unset-option buffer pokemon_prev
@@ -169,14 +169,14 @@ define-command -override -hidden pokemon-unset %{
   set-option -remove global pokemon_len 1
 }
 
-define-command -override -hidden pokemon-drop-current %{
+define-command -hidden pokemon-drop-current %{
   set-option global pokemon_head %opt{pokemon_prev}
   set-option global pokemon_iter %opt{pokemon_next}
   pokemon-update-index %opt{pokemon_index}
   pokemon-unset
 }
 
-define-command -override -hidden pokemon-update-index -params 1 %{
+define-command -hidden pokemon-update-index -params 1 %{
   evaluate-commands -buffer %opt{pokemon_iter} %{
     set-option global pokemon_head %val{bufname}
     set-option global pokemon_iter %opt{pokemon_next}
@@ -185,7 +185,7 @@ define-command -override -hidden pokemon-update-index -params 1 %{
   }
 }
 
-define-command -override -hidden pokemon-drop-by-index -params 1 %{
+define-command -hidden pokemon-drop-by-index -params 1 %{
   evaluate-commands -buffer '*' %{
     evaluate-commands %sh{
       if [ "$1" -eq "$kak_opt_pokemon_index" ]; then
@@ -196,7 +196,7 @@ define-command -override -hidden pokemon-drop-by-index -params 1 %{
   evaluate-commands -buffer %opt{pokemon_head} pokemon-drop-current
 }
 
-define-command -override -hidden pokemon-open-by-index -params 2 %{
+define-command -hidden pokemon-open-by-index -params 2 %{
   evaluate-commands -buffer '*' %{
     evaluate-commands %sh{
       if [ "$1" -eq "$kak_opt_pokemon_index" ]; then
@@ -216,7 +216,7 @@ define-command -hidden pokemon-buffer-select -params 1 %{
   }
 }
 
-define-command -override -hidden pokemon-open-in-the-list %{
+define-command -hidden pokemon-open-in-the-list %{
   try %{
     execute-keys 'x_:b ''<c-r>.''<ret>'
     try %{
@@ -244,7 +244,7 @@ hook global User "PokemonLink=(.*) next=(.*)" %{
   }
 }
 
-define-command -override -hidden pokemon-debug %{
+define-command -hidden pokemon-debug %{
   echo -debug -- ---
   echo -debug pokemon_head: %opt{pokemon_head}
   echo -debug pokemon_prev: %opt{pokemon_prev}
