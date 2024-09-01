@@ -188,6 +188,9 @@ define-command -hidden pokemon-unset %{
   unset-option buffer pokemon_next
   unset-option buffer pokemon_index
   set-option -remove global pokemon_len 1
+  unmap buffer pokemon s
+  unmap buffer pokemon n
+  unmap buffer pokemon p
 }
 
 define-command -hidden pokemon-current-drop %{
