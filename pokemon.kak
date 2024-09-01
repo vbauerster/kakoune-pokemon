@@ -42,6 +42,9 @@ define-command -docstring %{
   map global normal <a-8> ':pokemon-open 8<ret>'
   map global normal <a-9> ':pokemon-open 9<ret>'
   map global normal <a-0> ':pokemon-open<ret>' -docstring 'open last pinned one'
+  alias global pokemon-pin pp
+  alias global pokemon-drop pd
+  alias global pokemon-list pl
 }
 
 define-command -params ..1 -docstring %{
