@@ -44,11 +44,11 @@ define-command -docstring %{
   map global normal <a-0> ':pokemon-open<ret>' -docstring 'open last added one'
 }
 
-define-command -override pokemon-add -params ..1 -docstring %{
+define-command -override -params ..1 -docstring %{
   pokemon-add [switches]: add current buffer to the pokemon list
   Switches:
   prompt|p prompt before adding
-} %{
+} pokemon-add %{
   evaluate-commands %sh{
     [ "$kak_bufname" = '*debug*' ] && exit
     case "$1" in
@@ -70,9 +70,9 @@ define-command -override pokemon-add -params ..1 -docstring %{
   }
 }
 
-define-command -override pokemon-open -params ..1 -docstring %{
+define-command -override -params ..1 -docstring %{
   pokemon-open [index]: open pokemon by index or last added one if there is no index
-} %{
+} pokemon-open %{
   evaluate-commands %sh{
     index="${1:-0}"
     if [ "$index" -le "$kak_opt_pokemon_len" ]; then
@@ -85,9 +85,9 @@ define-command -override pokemon-open -params ..1 -docstring %{
   }
 }
 
-define-command -override pokemon-drop -params ..1 -docstring %{
+define-command -override -params ..1 -docstring %{
   pokemon-drop [index]: drop pokemon by index or current one if there is no index
-} %{
+} pokemon-drop %{
   evaluate-commands %sh{
     index="${1:-0}"
     if [ "$index" -le "$kak_opt_pokemon_len" ]; then
@@ -100,9 +100,9 @@ define-command -override pokemon-drop -params ..1 -docstring %{
   }
 }
 
-define-command -override pokemon-next -docstring %{
+define-command -override -docstring %{
   goto next pokemon if available in the current context
-} %{
+} pokemon-next %{
   try %{
     buffer %opt{pokemon_next}
     try %{
@@ -115,9 +115,9 @@ define-command -override pokemon-next -docstring %{
   }
 }
 
-define-command -override pokemon-prev -docstring %{
+define-command -override -docstring %{
   goto previous pokemon if available in the current context
-} %{
+} pokemon-prev %{
   try %{
     buffer %opt{pokemon_prev}
     try %{
@@ -130,9 +130,9 @@ define-command -override pokemon-prev -docstring %{
   }
 }
 
-define-command -override pokemon-list -docstring %{
+define-command -override -docstring %{
   list all pokemons in the *pokemons* buffer
-} %{
+} pokemon-list %{
   try %{
     buffer *pokemons*
   } catch %{
