@@ -44,7 +44,7 @@ define-command -docstring %{
   map global normal <a-0> ':pokemon-open<ret>' -docstring 'open last added one'
 }
 
-define-command -override -params ..1 -docstring %{
+define-command -params ..1 -docstring %{
   pokemon-add [switches]: add current buffer to the pokemon list
   Switches:
   prompt|p prompt before adding
@@ -70,7 +70,7 @@ define-command -override -params ..1 -docstring %{
   }
 }
 
-define-command -override -params ..1 -docstring %{
+define-command -params ..1 -docstring %{
   pokemon-open [index]: open pokemon by index or last added one if there is no index
 } pokemon-open %{
   evaluate-commands %sh{
@@ -85,7 +85,7 @@ define-command -override -params ..1 -docstring %{
   }
 }
 
-define-command -override -params ..1 -docstring %{
+define-command -params ..1 -docstring %{
   pokemon-drop [index]: drop pokemon by index or current one if there is no index
 } pokemon-drop %{
   evaluate-commands %sh{
@@ -100,7 +100,7 @@ define-command -override -params ..1 -docstring %{
   }
 }
 
-define-command -override -docstring %{
+define-command -docstring %{
   goto next pokemon if available in the current context
 } pokemon-next %{
   try %{
@@ -115,7 +115,7 @@ define-command -override -docstring %{
   }
 }
 
-define-command -override -docstring %{
+define-command -docstring %{
   goto previous pokemon if available in the current context
 } pokemon-prev %{
   try %{
@@ -130,7 +130,7 @@ define-command -override -docstring %{
   }
 }
 
-define-command -override -docstring %{
+define-command -docstring %{
   list all pokemons in the *pokemons* buffer
 } pokemon-list %{
   try %{
