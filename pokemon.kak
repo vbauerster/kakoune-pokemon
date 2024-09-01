@@ -92,7 +92,7 @@ define-command -override pokemon-drop -params ..1 -docstring %{
     index="${1:-0}"
     if [ "$index" -le "$kak_opt_pokemon_len" ]; then
       if [ "$index" -gt 0 ]; then
-        printf 'pokemon-drop-by-index %d\n' "$index"
+        printf 'pokemon-index-drop %d\n' "$index"
       elif [ "$kak_opt_pokemon_index" -gt 0 ]; then
         printf 'pokemon-current-drop\n'
       fi
@@ -201,7 +201,7 @@ define-command -hidden pokemon-index-update -params 1 %{
   }
 }
 
-define-command -hidden pokemon-drop-by-index -params 1 %{
+define-command -hidden pokemon-index-drop -params 1 %{
   evaluate-commands -buffer '*' %{
     evaluate-commands %sh{
       if [ "$1" -eq "$kak_opt_pokemon_index" ]; then
