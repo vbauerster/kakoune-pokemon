@@ -29,9 +29,9 @@ define-command -docstring %{
   unalias global pokemon-user-mode nop
 }
 
-define-command -override pokemon-map-default-keys -docstring %{
-  map default keybindings
-} %{
+define-command -docstring %{
+  map global normal <a-0>..<a-9> default keybindings
+} pokemon-keys-map %{
   map global normal <a-1> ':pokemon-open 1<ret>'
   map global normal <a-2> ':pokemon-open 2<ret>'
   map global normal <a-3> ':pokemon-open 3<ret>'

@@ -13,7 +13,7 @@ Add `pokemon.kak` to your autoload directory: `~/.config/kak/autoload/`, or sour
 
 ## Usage
 
-It's highly recommended to add default keybindings with `pokemon-map-default-keys` command, which will add following mappings:
+It's highly recommended to apply default keybindings with `pokemon-keys-map` command which will add following mappings:
 
 ```
   map global normal <a-1> ':pokemon-open 1<ret>'
@@ -49,7 +49,7 @@ Use `pokemon-add` command directly or map it to your liking. Good normal mode ca
 - `pokemon-prev`: goto previous pokemon if available in the current context
 - `pokemon-next`: goto next pokemon if available in the current context
 - `pokemon-list`: list all pokemons
-- `pokemon-map-default-keys`: map default keybindings
+- `pokemon-keys-map`: map default keybindings
 
 ## Alternatives
 
