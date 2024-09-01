@@ -155,7 +155,7 @@ define-command -override pokemon-list -docstring %{
       } catch %{
         execute-keys gg
       }
-      map buffer normal <ret> ':pokemon-open-in-the-list<ret>'
+      map buffer normal <ret> ':pokemon-list-open<ret>'
       map buffer normal <esc> ':delete-buffer *pokemons*<ret>'
       # negative lookahead trick allows not to drop *pokemons* buffer after '<ret>ga'
       # useful if <ret> was pressed in wrong line then 'ga' restores existing list.
@@ -232,7 +232,7 @@ define-command -hidden pokemon-buffer-select -params 1 %{
   }
 }
 
-define-command -hidden pokemon-open-in-the-list %{
+define-command -hidden pokemon-list-open %{
   try %{
     execute-keys 'x_:b ''<c-r>.''<ret>'
     try %{
