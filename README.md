@@ -10,6 +10,7 @@ Add `pokemon.kak` to your autoload directory: `~/.config/kak/autoload/`, or sour
 
 - no persistence, yes this is a feature.
 - linked list pokemons.
+- optionally set/restore cursor location.
 
 ## Usage
 
