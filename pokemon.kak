@@ -188,15 +188,15 @@ define-command -hidden pokemon-unset %{
 define-command -hidden pokemon-current-drop %{
   set-option global pokemon_head %opt{pokemon_prev}
   set-option global pokemon_iter %opt{pokemon_next}
-  pokemon-update-index %opt{pokemon_index}
+  pokemon-index-update %opt{pokemon_index}
   pokemon-unset
 }
 
-define-command -hidden pokemon-update-index -params 1 %{
+define-command -hidden pokemon-index-update -params 1 %{
   evaluate-commands -buffer %opt{pokemon_iter} %{
     set-option global pokemon_head %val{bufname}
     set-option global pokemon_iter %opt{pokemon_next}
-    pokemon-update-index %opt{pokemon_index}
+    pokemon-index-update %opt{pokemon_index}
     set-option buffer pokemon_index %arg{1}
   }
 }
