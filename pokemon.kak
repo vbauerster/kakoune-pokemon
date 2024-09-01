@@ -94,7 +94,7 @@ define-command -override pokemon-drop -params ..1 -docstring %{
       if [ "$index" -gt 0 ]; then
         printf 'pokemon-drop-by-index %d\n' "$index"
       elif [ "$kak_opt_pokemon_index" -gt 0 ]; then
-        printf 'pokemon-drop-current\n'
+        printf 'pokemon-current-drop\n'
       fi
     fi
   }
@@ -172,7 +172,7 @@ define-command -hidden pokemon-set %{
   set-option -add global pokemon_len 1
   set-option global pokemon_head %val{bufname}
   set-option buffer pokemon_index %opt{pokemon_len}
-  hook buffer BufClose '.*' pokemon-drop-current
+  hook buffer BufClose '.*' pokemon-current-drop
   map buffer pokemon s ':set-option buffer pokemon_selections_desc %val{selections_desc}<ret>' -docstring 'SET selection'
 }
 
@@ -185,7 +185,7 @@ define-command -hidden pokemon-unset %{
   set-option -remove global pokemon_len 1
 }
 
-define-command -hidden pokemon-drop-current %{
+define-command -hidden pokemon-current-drop %{
   set-option global pokemon_head %opt{pokemon_prev}
   set-option global pokemon_iter %opt{pokemon_next}
   pokemon-update-index %opt{pokemon_index}
@@ -209,7 +209,7 @@ define-command -hidden pokemon-drop-by-index -params 1 %{
       fi
     }
   }
-  evaluate-commands -buffer %opt{pokemon_head} pokemon-drop-current
+  evaluate-commands -buffer %opt{pokemon_head} pokemon-current-drop
 }
 
 define-command -hidden pokemon-open-by-index -params 2 %{
