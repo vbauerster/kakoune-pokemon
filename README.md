@@ -36,7 +36,7 @@ It's highly recommended to apply default keybindings with `pokemon-keys-map` com
 
 Index mappings are self adjusted (not fixed). Let say 3 buffers named `A, B, C` were pinned to the list so buffer `A` can be accessed by `<a-1>`, buffer `B` by `<a-2>`, and so on. Dropping buffer `B` makes `<a-2>` access buffer `C` and `<a-3>` becomes no-op.
 
-### Adding buffer to the pokemon list
+### Pinning a buffer
 
 Use `pokemon-pin` command directly or map it to your liking. Following is just example mappings:
 
