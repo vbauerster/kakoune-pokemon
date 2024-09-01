@@ -31,21 +31,23 @@ define-command -override pokemon-map-default-keys -docstring %{
 define-command -override pokemon-add -params ..1 -docstring %{
   pokemon-add [switches]: add current buffer to the pokemon list
   Switches:
-  prompt|p prompt before add and|or display pokemon user mode
+  prompt|p prompt before adding
 } %{
   evaluate-commands %sh{
     [ "$kak_bufname" = '*debug*' ] && exit
     case "$1" in
       prompt|p)
         if [ "$kak_opt_pokemon_index" -eq 0 ]; then
-          printf "prompt 'add pokemon? (enter=yes/esc=abort)' 'pokemon-set;enter-user-mode pokemon'\n"
+          printf "prompt 'add pokemon? (enter=yes/esc=abort)' 'pokemon-set; enter-user-mode pokemon'\n"
         else
           printf 'enter-user-mode pokemon\n'
         fi
         ;;
       *)
         if [ "$kak_opt_pokemon_index" -eq 0 ]; then
-          printf 'pokemon-set\n'
+          printf 'pokemon-set; enter-user-mode pokemon\n'
+        else
+          printf 'enter-user-mode pokemon\n'
         fi
         ;;
     esac
