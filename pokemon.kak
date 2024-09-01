@@ -77,7 +77,7 @@ define-command -override pokemon-open -params ..1 -docstring %{
     index="${1:-0}"
     if [ "$index" -le "$kak_opt_pokemon_len" ]; then
       if [ "$index" -gt 0 ]; then
-        printf "pokemon-open-by-index %d '%s'\n" "$index" "$kak_client"
+        printf "pokemon-index-open %d '%s'\n" "$index" "$kak_client"
       elif [ -n "$kak_opt_pokemon_head" ]; then
         printf "evaluate-commands -buffer '%s' -verbatim -- pokemon-buffer-select %s\n" "$kak_opt_pokemon_head" "$kak_client"
       fi
@@ -212,7 +212,7 @@ define-command -hidden pokemon-index-drop -params 1 %{
   evaluate-commands -buffer %opt{pokemon_head} pokemon-current-drop
 }
 
-define-command -hidden pokemon-open-by-index -params 2 %{
+define-command -hidden pokemon-index-open -params 2 %{
   evaluate-commands -buffer '*' %{
     evaluate-commands %sh{
       if [ "$1" -eq "$kak_opt_pokemon_index" ]; then
