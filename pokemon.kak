@@ -18,13 +18,13 @@ define-command -hidden pokemon-user-mode %{
 }
 
 define-command -docstring %{
-  don't show user mode after pokemon-add command
+  don't show user mode after pokemon-pin command
 } pokemon-user-mode-disable %{
   alias global pokemon-user-mode nop
 }
 
 define-command -docstring %{
-  show user mode after pokemon-add command
+  show user mode after pokemon-pin command
 } pokemon-user-mode-enable %{
   unalias global pokemon-user-mode nop
 }
@@ -41,20 +41,22 @@ define-command -docstring %{
   map global normal <a-7> ':pokemon-open 7<ret>'
   map global normal <a-8> ':pokemon-open 8<ret>'
   map global normal <a-9> ':pokemon-open 9<ret>'
-  map global normal <a-0> ':pokemon-open<ret>' -docstring 'open last added one'
+  map global normal <a-0> ':pokemon-open<ret>' -docstring 'open last pinned one'
 }
 
 define-command -params ..1 -docstring %{
-  pokemon-add [switches]: add current buffer to the pokemon list
+  pokemon-pin [switches]: pin current buffer and enter user mode
   Switches:
-  prompt|p prompt before adding
-} pokemon-add %{
+  prompt|p prompt before pin
+  Hint:
+  pokemon-user-mode-disable command disables entering user mode
+} pokemon-pin %{
   evaluate-commands %sh{
     [ "$kak_bufname" = '*debug*' ] && exit
     case "$1" in
       prompt|p)
         if [ "$kak_opt_pokemon_index" -eq 0 ]; then
-          printf "prompt 'add pokemon? (enter=yes/esc=abort)' 'pokemon-set; pokemon-user-mode'\n"
+          printf "prompt 'pin pokemon? (enter=yes/esc=abort)' 'pokemon-set; pokemon-user-mode'\n"
         else
           printf 'pokemon-user-mode\n'
         fi
@@ -71,7 +73,7 @@ define-command -params ..1 -docstring %{
 }
 
 define-command -params ..1 -docstring %{
-  pokemon-open [index]: open pokemon by index or last added one if there is no index
+  pokemon-open [index]: open pokemon by index or last pinned one if index is omitted
 } pokemon-open %{
   evaluate-commands %sh{
     index="${1:-0}"
@@ -86,7 +88,7 @@ define-command -params ..1 -docstring %{
 }
 
 define-command -params ..1 -docstring %{
-  pokemon-drop [index]: drop pokemon by index or current one if there is no index
+  pokemon-drop [index]: drop pokemon by index or current one if index is omitted
 } pokemon-drop %{
   evaluate-commands %sh{
     index="${1:-0}"
