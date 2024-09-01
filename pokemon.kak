@@ -13,6 +13,22 @@ map global pokemon n ':pokemon-next<ret>'
 map global pokemon l ':pokemon-list<ret>' -docstring 'LIST'
 map global pokemon d ':pokemon-drop<ret>' -docstring 'DROP'
 
+define-command -hidden pokemon-user-mode %{
+  enter-user-mode pokemon
+}
+
+define-command -docstring %{
+  don't show user mode after pokemon-add command
+} pokemon-user-mode-disable %{
+  alias global pokemon-user-mode nop
+}
+
+define-command -docstring %{
+  show user mode after pokemon-add command
+} pokemon-user-mode-enable %{
+  unalias global pokemon-user-mode nop
+}
+
 define-command -override pokemon-map-default-keys -docstring %{
   map default keybindings
 } %{
@@ -38,16 +54,16 @@ define-command -override pokemon-add -params ..1 -docstring %{
     case "$1" in
       prompt|p)
         if [ "$kak_opt_pokemon_index" -eq 0 ]; then
-          printf "prompt 'add pokemon? (enter=yes/esc=abort)' 'pokemon-set; enter-user-mode pokemon'\n"
+          printf "prompt 'add pokemon? (enter=yes/esc=abort)' 'pokemon-set; pokemon-user-mode'\n"
         else
-          printf 'enter-user-mode pokemon\n'
+          printf 'pokemon-user-mode\n'
         fi
         ;;
       *)
         if [ "$kak_opt_pokemon_index" -eq 0 ]; then
-          printf 'pokemon-set; enter-user-mode pokemon\n'
+          printf 'pokemon-set; pokemon-user-mode\n'
         else
-          printf 'enter-user-mode pokemon\n'
+          printf 'pokemon-user-mode\n'
         fi
         ;;
     esac
