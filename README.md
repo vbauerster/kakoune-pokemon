@@ -38,7 +38,7 @@ Index mappings are self adjusted (not fixed). Let say 3 buffers named `A, B, C` 
 
 ### Adding buffer to the pokemon list
 
-Use `pokemon-pin` command directly or map it to your liking. Following is just example mappings (not applied by default):
+Use `pokemon-pin` command directly or map it to your liking. Following is just example mappings:
 
 ```
   map global normal <a-y> ':pokemon-pin prompt<ret>' -docstring 'prompt before pin; enter user mode afterwards'
