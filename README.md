@@ -37,8 +37,8 @@ Index mappings are self adjusted (not fixed). Let say 3 buffers named `A, B, C` 
 Use `pokemon-add` command directly or map it to your liking. Good normal mode candidates are `^`, `'`, `X`, `<a-X>`, `<a-y>` and `<a-Y>` because all of them are free by default. Following is just example mappings (not applied by default):
 
 ```
-  map global normal <a-y> ':pokemon-add prompt<ret>' -docstring 'prompt before add and enter pokemon user mode afterwards'
-  map global normal <a-Y> ':pokemon-add<ret>' -docstring 'add silently, no prompt no user mode'
+  map global normal <a-y> ':pokemon-add prompt<ret>' -docstring 'prompt before adding; enter user mode afterwards'
+  map global normal <a-Y> ':pokemon-add<ret>' -docstring 'add without prompt; enter user mode afterwards'
 ```
 
 ### Available commands
