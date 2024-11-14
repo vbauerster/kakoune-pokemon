@@ -41,6 +41,20 @@ define-command -docstring %{
   map global normal <a-0> ':pokemon-open<ret>' -docstring 'open last pinned one'
 }
 
+define-command -hidden pokemon-pin-prompt %{
+  echo -markup '{Information}pin pokemon? (y/n)'
+  on-key %{
+    echo
+    evaluate-commands %sh{
+      case "$kak_key" in
+        y|Y)
+          printf 'pokemon-set; pokemon-user-mode\n'
+        ;;
+      esac
+    }
+  }
+}
+
 define-command -params ..1 -docstring %{
   pokemon-pin [switches]: pin current buffer and enter user mode
   Switches:
@@ -53,7 +67,7 @@ define-command -params ..1 -docstring %{
     case "$1" in
       prompt|p)
         if [ "$kak_opt_pokemon_index" -eq 0 ]; then
-          printf "prompt 'pin pokemon? (enter=yes/esc=abort)' 'pokemon-set; pokemon-user-mode'\n"
+          printf 'pokemon-pin-prompt\n'
         else
           printf 'pokemon-user-mode\n'
         fi
