@@ -52,6 +52,14 @@ Use `pokemon-pin` command directly or map it to your liking. Following is just e
 - `pokemon-list`: list all pokemons in the `*pokemons*` buffer
 - `pokemon-keys-map`: map default keybindings
 
+### modelinefmt tip
+
+Add `%opt{pokemon_index}` to your `modelinefmt` in order to see buffer's pin status. Value 0 means buffer isn't pinned and value greater than 0 means buffer is pinned. Following is just example:
+
+```
+set-option -add global modelinefmt ' p:%opt{pokemon_index} '
+```
+
 ## Alternatives
 
 [kak-harpoon](https://github.com/raiguard/kak-harpoon)
