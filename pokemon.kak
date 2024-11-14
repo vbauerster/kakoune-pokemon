@@ -260,7 +260,7 @@ define-command -hidden pokemon-list-open %{
   }
 }
 
-hook global User "PokemonLink=(.*) prev=(.*)" %{
+hook global User 'PokemonLink=(.*) prev=(.*)' %{
   # if -buffer arg is empty eval block is not executed
   evaluate-commands -buffer %val{hook_param_capture_1} %{
     set-option buffer pokemon_prev %val{hook_param_capture_2}
@@ -268,7 +268,7 @@ hook global User "PokemonLink=(.*) prev=(.*)" %{
   }
 }
 
-hook global User "PokemonLink=(.*) next=(.*)" %{
+hook global User 'PokemonLink=(.*) next=(.*)' %{
   # if -buffer arg is empty eval block is not executed
   evaluate-commands -buffer %val{hook_param_capture_1} %{
     set-option buffer pokemon_next %val{hook_param_capture_2}
