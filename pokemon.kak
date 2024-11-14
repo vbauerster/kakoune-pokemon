@@ -6,28 +6,25 @@ declare-option -hidden str pokemon_iter
 declare-option -hidden int pokemon_len
 declare-option -hidden int pokemon_index
 declare-option -hidden str-list pokemon_list
+declare-option -docstring 'automatically show pokemon user mode' bool pokemon_auto_user_mode true
+
+define-command -hidden pokemon-user-mode %{
+  enter-user-mode pokemon
+}
+hook global GlobalSetOption pokemon_auto_user_mode=true %{
+  define-command -hidden -override pokemon-user-mode %{
+    enter-user-mode pokemon
+  }
+}
+hook global GlobalSetOption pokemon_auto_user_mode=false %{
+  define-command -hidden -override pokemon-user-mode nop
+}
 
 declare-user-mode pokemon
 map global pokemon p ':pokemon-prev<ret>'
 map global pokemon n ':pokemon-next<ret>'
 map global pokemon l ':pokemon-list<ret>' -docstring 'LIST'
 map global pokemon d ':pokemon-drop<ret>' -docstring 'DROP'
-
-define-command -hidden pokemon-user-mode %{
-  enter-user-mode pokemon
-}
-
-define-command -docstring %{
-  don't show user mode after pokemon-pin command
-} pokemon-user-mode-disable %{
-  alias global pokemon-user-mode nop
-}
-
-define-command -docstring %{
-  show user mode after pokemon-pin command
-} pokemon-user-mode-enable %{
-  unalias global pokemon-user-mode nop
-}
 
 define-command -docstring %{
   map global normal <a-0>..<a-9> default keybindings

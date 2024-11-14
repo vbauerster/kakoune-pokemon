@@ -51,8 +51,6 @@ Use `pokemon-pin` command directly or map it to your liking. Following is just e
 - `pokemon-next`: goto next pokemon if available in the current context
 - `pokemon-list`: list all pokemons in the `*pokemons*` buffer
 - `pokemon-keys-map`: map default keybindings
-- `pokemon-user-mode-disable`: don't show user mode after `pokemon-pin` command
-- `pokemon-user-mode-enable`: show user mode after `pokemon-pin` command
 
 ## Alternatives
 
