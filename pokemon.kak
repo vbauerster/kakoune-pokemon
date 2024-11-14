@@ -60,7 +60,7 @@ define-command -params ..1 -docstring %{
   Switches:
   prompt|p prompt before pin
   Hint:
-  pokemon-user-mode-disable command disables entering user mode
+  set pokemon_auto_user_mode to false to disable entering user mode
 } pokemon-pin %{
   evaluate-commands %sh{
     [ "$kak_bufname" = '*debug*' ] && exit
