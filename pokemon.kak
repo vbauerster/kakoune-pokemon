@@ -24,7 +24,7 @@ declare-user-mode pokemon
 map global pokemon p ':pokemon-prev<ret>'
 map global pokemon n ':pokemon-next<ret>'
 map global pokemon l ':pokemon-list<ret>' -docstring 'LIST'
-map global pokemon d ':pokemon-drop<ret>' -docstring 'DROP'
+map global pokemon s ':pokemon-pin<ret>' -docstring 'PIN'
 
 define-command -docstring %{
   map global normal <a-0>..<a-9> default keybindings
@@ -185,8 +185,9 @@ define-command -hidden pokemon-set %{
   set-option -add global pokemon_len 1
   set-option global pokemon_head %val{bufname}
   set-option buffer pokemon_index %opt{pokemon_len}
+  map buffer pokemon d ':pokemon-drop<ret>' -docstring 'DROP'
+  map buffer pokemon s ':set-option buffer pokemon_selections_desc %val{selections_desc}<ret>' -docstring 'SELECTION SAVE'
   hook buffer BufClose '.*' pokemon-current-drop
-  map buffer pokemon s ':set-option buffer pokemon_selections_desc %val{selections_desc}<ret>' -docstring 'SET selection'
 }
 
 define-command -hidden pokemon-unset %{
