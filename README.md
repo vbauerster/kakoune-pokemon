@@ -35,11 +35,10 @@ Index mappings are self adjusted (not fixed). Let say 3 buffers named `A, B, C` 
 
 ### Pinning a buffer
 
-Use `pokemon-pin` command directly or map it to your liking. Following is just example mappings:
+It's recommended to pin a buffer via `pokemon` user mode, though `pokemon-pin` command can be used directly. Following is just example and is not mapped by default.
 
 ```
-map global normal <a-y> ':pokemon-pin prompt<ret>' -docstring 'prompt before pin; enter user mode afterwards'
-map global normal <a-Y> ':pokemon-pin<ret>' -docstring 'pin without prompt; enter user mode afterwards'
+map global user s ':enter-user-mode pokemon<ret>' -docstring 'pokemon mode'
 ```
 
 ### Available commands
