@@ -43,13 +43,19 @@ map global user s ':enter-user-mode pokemon<ret>' -docstring 'pokemon mode'
 
 ### Available commands
 
-- `pokemon-pin`: pin current buffer and enter user mode
+- `pokemon-pin`:  pin current buffer and optionally enter user mode
 - `pokemon-drop`: drop pokemon by index or current one if index is omitted
 - `pokemon-open`: open pokemon by index or last pinned one if index is omitted
 - `pokemon-prev`: goto previous pokemon if available in the current context
 - `pokemon-next`: goto next pokemon if available in the current context
 - `pokemon-list`: list all pokemons in the `*pokemons*` buffer
 - `pokemon-keys-map`: map default keybindings
+
+By default `pokemon-pin` enters `pokemon` user mode after successful pinning. It is possible to disable this by:
+
+```
+set-option global pokemon_auto_user_mode false
+```
 
 ### modelinefmt tip
 
