@@ -24,7 +24,6 @@ declare-user-mode pokemon
 map global pokemon p ':pokemon-prev<ret>'
 map global pokemon n ':pokemon-next<ret>'
 map global pokemon l ':pokemon-list<ret>' -docstring 'LIST'
-map global pokemon s ':pokemon-pin<ret>' -docstring 'PIN'
 
 define-command -docstring %{
   map global normal <a-0>..<a-9> default keybindings

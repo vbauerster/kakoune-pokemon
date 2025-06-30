@@ -33,14 +33,6 @@ map global normal <a-0> ':pokemon-open<ret>' -docstring 'open last pinned one'
 
 Index mappings are self adjusted (not fixed). Let say 3 buffers named `A, B, C` were pinned to the list so buffer `A` can be accessed by `<a-1>`, buffer `B` by `<a-2>`, and so on. Dropping buffer `B` makes `<a-2>` access buffer `C` and `<a-3>` becomes no-op.
 
-### Pinning a buffer
-
-It's recommended to pin a buffer via `pokemon` user mode, though `pokemon-pin` command can be used directly. Following is just example and is not mapped by default.
-
-```
-map global user s ':enter-user-mode pokemon<ret>' -docstring 'pokemon mode'
-```
-
 ### Available commands
 
 - `pokemon-pin`:  pin current buffer and optionally enter user mode
