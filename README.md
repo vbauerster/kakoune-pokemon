@@ -60,3 +60,4 @@ set-option -add global modelinefmt ' p:%opt{pokemon_index} '
 ## Alternatives
 
 [kak-harpoon](https://github.com/raiguard/kak-harpoon)
+[kakoune-marks](https://github.com/saifulapm/kakoune-marks)
