@@ -171,7 +171,7 @@ define-command -docstring %{
       map buffer normal <esc> ':delete-buffer *pokemons*<ret>'
       # negative lookahead trick allows not to drop *pokemons* buffer after '<ret>ga'
       # useful if <ret> was pressed in wrong line then 'ga' restores existing list.
-      hook -once global WinDisplay '(?!\*pokemons\*).*' %{
+      hook -once global WinDisplay '^(?!.*\*pokemons\*).+$' %{
         try %{ delete-buffer *pokemons* }
       }
     }
