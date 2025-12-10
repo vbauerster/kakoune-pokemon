@@ -43,12 +43,13 @@ define-command -docstring %{
 define-command -hidden pokemon-pin-prompt %{
   echo -markup '{Information}pin pokemon? (y/n)'
   on-key %{
-    echo
     evaluate-commands %sh{
       case "$kak_key" in
-        y|Y)
-          printf 'pokemon-set; pokemon-user-mode\n'
+        y|Y|\<ret\>)
+          printf %s\\n echo pokemon-set pokemon-user-mode
         ;;
+        *)
+          printf %s\\n echo
       esac
     }
   }
