@@ -41,7 +41,7 @@ define-command -docstring %{
 }
 
 define-command -hidden pokemon-pin-prompt %{
-  echo -markup '{Information}pin pokemon? (y/n)'
+  echo -markup '{InlineInformation}pin pokemon? (Y/n)'
   on-key %{
     evaluate-commands %sh{
       case "$kak_key" in
