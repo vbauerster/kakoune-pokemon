@@ -58,14 +58,14 @@ define-command -hidden pokemon-pin-prompt %{
 define-command -params ..1 -docstring %{
   pokemon-pin [switches]: pin current buffer and enter user mode
   Switches:
-  prompt|p prompt before pin
+  -p|-prompt prompt before pin
   Hint:
   set pokemon_auto_user_mode to false to disable entering user mode
 } pokemon-pin %{
   evaluate-commands %sh{
     [ "$kak_bufname" = '*debug*' ] && exit
     case "$1" in
-      prompt|p)
+      -p|-prompt)
         if [ "$kak_opt_pokemon_index" -eq 0 ]; then
           printf 'pokemon-pin-prompt\n'
         else
