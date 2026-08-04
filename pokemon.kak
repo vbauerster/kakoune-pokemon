@@ -120,7 +120,6 @@ define-command -docstring %{
     buffer %opt{pokemon_next}
     try %{
       select %opt{pokemon_selections_desc}
-      execute-keys vv
     }
     enter-user-mode pokemon
   } catch %{
@@ -135,7 +134,6 @@ define-command -docstring %{
     buffer %opt{pokemon_prev}
     try %{
       select %opt{pokemon_selections_desc}
-      execute-keys vv
     }
     enter-user-mode pokemon
   } catch %{
@@ -244,7 +242,6 @@ define-command -hidden pokemon-buffer-select -params 1 %{
     buffer '%val{bufname}'
     try %%{
       select %opt{pokemon_selections_desc}
-      execute-keys vv
     }
   }
 }
@@ -254,7 +251,6 @@ define-command -hidden pokemon-list-open %{
     execute-keys 'x_:b ''<c-r>.''<ret>'
     try %{
       select %opt{pokemon_selections_desc}
-      execute-keys vv
     }
   } catch %{
     pokemon-open %val{cursor_line}
